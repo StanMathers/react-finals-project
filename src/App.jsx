@@ -1,45 +1,26 @@
-import { useEffect, useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
+// Third party libraries
+import "bootstrap/dist/js/bootstrap.bundle.min.js";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap-icons/font/bootstrap-icons.css";
 
-import covid from "../services/covid-services";
+// Routing
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+// Pages
+import Home from "./pages/Home";
+
+// Components
+import Navbar from "./components/general/Navbar"
 
 function App() {
-	const [totalReports, setTotalReports] = useState({
-		date: "",
-		last_update: "",
-		confirmed: "",
-		deaths: "",
-		recovered: "",
-		active: "",
-	});
-
-	useEffect(() => {
-		const date = new Date();
-
-		const res = covid.getTotalReport("2020", "04", "01");
-
-		res.then((data) => {
-			setTotalReports({
-				date: data.data.date,
-				last_update: data.data.last_update,
-				confirmed: data.data.confirmed,
-				deaths: data.data.deaths,
-				recovered: data.data.recovered,
-				active: data.data.active,
-			});
-		});
-	}, []);
-
 	return (
-		<ul>
-			<li>Date: {totalReports.date}</li>
-			<li>Last Update: {totalReports.last_update}</li>
-			<li>Confirmed Cases: {totalReports.confirmed}</li>
-			<li>Deaths: {totalReports.deaths}</li>
-			<li>Recovered: {totalReports.recovered}</li>
-			<li>Active Cases: {totalReports.active}</li>
-		</ul>
+		<BrowserRouter>
+			<Navbar />
+			<h1 className="text-center">Covid Stats</h1>
+			<Routes>
+				<Route path="/" element={<Home />} />
+			</Routes>
+		</BrowserRouter>
 	);
 }
 
