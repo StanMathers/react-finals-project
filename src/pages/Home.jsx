@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 
+import Spinner from "../components/general/Spinner"
+
 import covid from "../../services/covid-services";
 import dateServices from "../../services/date-services";
 import {
@@ -22,6 +24,7 @@ const Home = () => {
 		month: 4,
 		day: 2,
 	});
+    const [isLoading, setIsLoading] = useState(true);
 
 	const [icon, setIcon] = useState("bi bi-heart h4");
 
@@ -47,6 +50,7 @@ const Home = () => {
 				recovered: data.data.recovered,
 				active: data.data.active,
 			});
+            setIsLoading(false);
 		});
 	}, [selectedDate]);
 
@@ -88,6 +92,7 @@ const Home = () => {
 				<div className="col-10">
 					<input
 						onChange={(e) => {
+                            setIsLoading(true);
 							let date = e.target.value.split("-");
 							console.log(date);
 							setSelectedDate({
@@ -116,16 +121,16 @@ const Home = () => {
 
 			<div className="row align-items-center justify-content-center text-center">
 				<div className="col-12">
-					<p className="text-danger h2">Confirmed: {totalReports.confirmed}</p>
+					<div className="text-danger h2">Confirmed: { isLoading ? <Spinner />: totalReports.confirmed}</div>
 				</div>
 				<div className="col-12">
-					<p className="text-danger h2">Deaths: {totalReports.deaths}</p>
+					<div className="text-danger h2">Deaths: {isLoading ? <Spinner />: totalReports.deaths}</div>
 				</div>
 				<div className="col-12">
-					<p className="text-success h2">Recovered: {totalReports.recovered}</p>
+					<div className="text-success h2">Recovered: {isLoading ? <Spinner />: totalReports.recovered}</div>
 				</div>
 				<div className="col-12">
-					<p className="text-danger h2">Recovered: {totalReports.active}</p>
+					<div className="text-danger h2">Recovered: {isLoading ? <Spinner />: totalReports.active}</div>
 				</div>
 			</div>
 		</div>
