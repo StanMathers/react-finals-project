@@ -11,6 +11,8 @@ import Home from "./pages/Home";
 
 // Components
 import Navbar from "./components/general/Navbar"
+import Favourites from "./pages/Favourites";
+import Details from "./pages/Details";
 
 function App() {
 	return (
@@ -19,6 +21,8 @@ function App() {
 			<h1 className="text-center">Covid Stats</h1>
 			<Routes>
 				<Route path="/" element={<Home />} />
+				<Route path="/saved" element={<Favourites />} />
+				<Route path="/saved/:date" element={<Details />} />
 			</Routes>
 		</BrowserRouter>
 	);

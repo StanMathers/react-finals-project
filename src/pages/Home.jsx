@@ -3,6 +3,10 @@ import { useState } from "react";
 
 import covid from "../../services/covid-services";
 import dateServices from "../../services/date-services";
+import {
+	loadParsedFavourites,
+	dateExistsInFavourites,
+} from "../../utils/storage-utils";
 
 const Home = () => {
 	const [totalReports, setTotalReports] = useState({
@@ -55,23 +59,10 @@ const Home = () => {
 	});
 
 	// Local storage management start
-	const loadParsedFavourites = () => {
-		return JSON.parse(localStorage.getItem("favourites"));
-	};
-
-	const dateExistsInFavourites = (date) => {
-		let favourites = loadParsedFavourites();
-		for (let i = 0; i < favourites.length; i++) {
-			if (favourites[i].date === date) {
-				return true;
-			}
-		}
-		return false;
-	};
 
 	const handleOnFavouriteSelect = () => {
 		console.log("Clicked");
-		if (localStorage.getItem("favourite") === undefined) {
+		if (localStorage.getItem("favourites") === null || localStorage.getItem("favourites") === null) {
 			localStorage.setItem("favourites", JSON.stringify([totalReports]));
 			setIcon("bi bi-heart-fill h4");
 		} else {
