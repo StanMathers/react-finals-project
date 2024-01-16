@@ -28,5 +28,21 @@ const fetchFavouriteByDate = (date) => {
     }
 }
 
+const addComment = (date, comment) => {
+    let parsedFavourites = loadParsedFavourites();
+    if (!parsedFavourites) {
+        return null;
+    }
 
-export { loadParsedFavourites, dateExistsInFavourites, fetchFavouriteByDate }
+    for (let i = 0; i < parsedFavourites.length; i++) {
+        if (parsedFavourites[i].date === date) {
+            parsedFavourites[i].comment = comment;
+            localStorage.setItem("favourites", JSON.stringify(parsedFavourites));
+            return parsedFavourites[i];
+        }
+    }
+
+}
+
+
+export { loadParsedFavourites, dateExistsInFavourites, fetchFavouriteByDate, addComment }

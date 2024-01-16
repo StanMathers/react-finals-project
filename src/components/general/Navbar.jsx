@@ -1,6 +1,14 @@
 import React, { useState, useEffect } from "react";
 // Get current endpoint from react-router-dom
+import "../../styles/Navbar/styles.css";
 import { useLocation, Link } from "react-router-dom";
+import { motion } from "framer-motion";
+
+const spring = {
+	type: "spring",
+	stiffness: 700,
+	damping: 30,
+};
 
 const Navbar = ({ theme, onThemeChange }) => {
 	// Get current endpoint from react-router-dom
@@ -54,18 +62,13 @@ const Navbar = ({ theme, onThemeChange }) => {
 							</Link>
 						</li>
 					</ul>
-					<div className="d-flex align-items-center">
-						<div className="form-check form-switch d-flex align-items-center">
-							<input
-								className="form-check-input"
-								type="checkbox"
-								role="switch"
-								id="flexSwitchCheckDefault"
-								onChange={onThemeChange}
-								checked={theme === "dark"}
-							/>
+					<div className="d-flex align-items-center gap-2">
+						<div className="switch form-control" data-ison={theme==="dark"} onClick={onThemeChange}>
+							<motion.div className="handle" layout transition={spring} />
 						</div>
-						<i className={themeIcon + " h5"}></i>
+						<a>
+							<i className={themeIcon + " h5"}></i>
+						</a>
 					</div>
 				</div>
 			</div>

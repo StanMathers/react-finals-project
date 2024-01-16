@@ -9,6 +9,7 @@ import {
 	loadParsedFavourites,
 	dateExistsInFavourites,
 } from "../../utils/storage-utils";
+import { motion } from "framer-motion"
 
 const Home = () => {
 	const [totalReports, setTotalReports] = useState({

@@ -1,7 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import {
 	loadParsedFavourites,
-	dateExistsInFavourites,
 } from "../../utils/storage-utils";
 
 import Card from "../components/Favourites/Card";
@@ -20,12 +19,13 @@ const Favourites = () => {
 
 	return (
 		<div className="container">
-			<div className="row">
+			<div className="row gy-2">
 				{parsedFavourites.map((fav) => {
 					return (
 						<div className="col-12 col-item" key={fav.date}>
 							<Card
 								date={fav.date}
+								comment={fav.comment}
 								lastUpdated={fav.last_update}
 								onClick={handleOnClick}
 							/>
