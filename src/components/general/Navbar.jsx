@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from "react";
-import useTheme from "../../hooks/useTheme";
 // Get current endpoint from react-router-dom
 import { useLocation, Link } from "react-router-dom";
 
-const Navbar = () => {
+const Navbar = ({ theme, onThemeChange }) => {
 	// Get current endpoint from react-router-dom
 	const location = useLocation();
 	const path = location.pathname;
 	const [themeIcon, setThemeIcon] = useState("bi bi-moon");
-	const { theme, toggleTheme } = useTheme();
 
 	useEffect(() => {
 		if (theme === "light") {
@@ -56,19 +54,19 @@ const Navbar = () => {
 							</Link>
 						</li>
 						<li className="nav-item">
-							<div class="form-check form-switch">
+							<div className="form-check form-switch">
 								<input
 									className="form-check-input"
 									type="checkbox"
 									role="switch"
 									id="flexSwitchCheckDefault"
-									onChange={toggleTheme}
+									onChange={onThemeChange}
 									checked={theme === "dark"}
 								/>
 
 								<label
 									className="form-check-label"
-									for="flexSwitchCheckDefault"
+									htmlFor="flexSwitchCheckDefault"
 								>
 									<i className={themeIcon}></i>
 								</label>
