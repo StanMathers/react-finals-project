@@ -2,19 +2,19 @@ import React from "react";
 import { useRef } from "react";
 import { addComment } from "../../../utils/storage-utils";
 
-const Modal = ({ date, onModalClose }) => {
+const Modal = ({ date, onModalClose, onCommentAdd }) => {
 	const modalStyle = {
 		display: "block",
 		backgroundColor: "rgba(0, 0, 0, 0.8)",
 	};
-    const commentRef = useRef();
+	const commentRef = useRef();
 	const handleOnSave = (e) => {
-        e.preventDefault();
-        const comment = commentRef.current.value;
-        addComment(date, comment);
-        onModalClose();
-    }
-    return (
+		e.preventDefault();
+		const comment = commentRef.current.value;
+		onCommentAdd(date, comment);
+		onModalClose();
+	};
+	return (
 		<div className="modal show fade" tabIndex="-1" style={modalStyle}>
 			<div className="modal-dialog">
 				<div className="modal-content">
@@ -34,7 +34,12 @@ const Modal = ({ date, onModalClose }) => {
 							<label htmlFor="confirmed" className="form-label">
 								Comment
 							</label>
-							<input ref={commentRef} type="text" className="form-control" id="confirmed" />
+							<input
+								ref={commentRef}
+								type="text"
+								className="form-control"
+								id="confirmed"
+							/>
 						</div>
 					</div>
 					<div className="modal-footer">

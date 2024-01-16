@@ -9,7 +9,7 @@ import {
 	loadParsedFavourites,
 	dateExistsInFavourites,
 } from "../../utils/storage-utils";
-import { motion } from "framer-motion"
+import { motion } from "framer-motion";
 
 const Home = () => {
 	const [totalReports, setTotalReports] = useState({
@@ -118,9 +118,17 @@ const Home = () => {
 					/>
 				</div>
 				<div className="col-2 align-self-center">
-					<a onClick={handleOnFavouriteSelect}>
+					{/* <a onClick={handleOnFavouriteSelect}>
 						<i className={icon}></i>
-					</a>
+					</a> */}
+					<motion.button
+						whileHover={{ scale: 1.1 }}
+						whileTap={{ scale: 0.9 }}
+						onClick={handleOnFavouriteSelect}
+						className="bg-transparent border-0"
+					>
+						<i className={icon}></i>
+					</motion.button>
 				</div>
 			</div>
 

@@ -32,13 +32,15 @@ function App() {
 
 	return (
 		<BrowserRouter>
-			<Navbar theme={theme} onThemeChange={toggleTheme} />
-			<h1 className="text-center">Covid Stats</h1>
+			<div className="d-flex flex-column gap-3">
+				<Navbar theme={theme} onThemeChange={toggleTheme} />
+				<h1 className="text-center">Covid Stats</h1>
 			<Routes>
 				<Route path="/" element={<Home />} />
 				<Route path="/saved" element={<Favourites />} />
 				<Route path="/saved/:date" element={<Details />} />
 			</Routes>
+			</div>
 		</BrowserRouter>
 	);
 }
