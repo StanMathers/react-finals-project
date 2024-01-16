@@ -1,19 +1,29 @@
 import React from "react";
-import { useRef } from "react";
-import { addComment } from "../../../utils/storage-utils";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+
+const schema = yup.object().shape({
+	comment: yup.string().required("Comment is required"),
+});
 
 const Modal = ({ date, onModalClose, onCommentAdd }) => {
 	const modalStyle = {
 		display: "block",
 		backgroundColor: "rgba(0, 0, 0, 0.8)",
 	};
-	const commentRef = useRef();
-	const handleOnSave = (e) => {
-		e.preventDefault();
-		const comment = commentRef.current.value;
-		onCommentAdd(date, comment);
+	const {
+		register,
+		handleSubmit,
+		formState: { errors },
+	} = useForm({
+		resolver: yupResolver(schema),
+	});
+	const onSubmit = (data) => {
+		onCommentAdd(date, data.comment);
 		onModalClose();
 	};
+
 	return (
 		<div className="modal show fade" tabIndex="-1" style={modalStyle}>
 			<div className="modal-dialog">
@@ -28,36 +38,37 @@ const Modal = ({ date, onModalClose, onCommentAdd }) => {
 							onClick={onModalClose}
 						></button>
 					</div>
-					<div className="modal-body">
-						{/* Text area */}
-						<div className="mb-3">
-							<label htmlFor="confirmed" className="form-label">
-								Comment
-							</label>
-							<input
-								ref={commentRef}
-								type="text"
-								className="form-control"
-								id="confirmed"
-							/>
+					<form onSubmit={handleSubmit(onSubmit)}>
+						<div className="modal-body">
+							{/* Text area */}
+							<div className="mb-3">
+								<label htmlFor="confirmed" className="form-label">
+									Comment
+								</label>
+								<input
+									type="text"
+									name="comment"
+									placeholder="Comment"
+									className="form-control"
+									id="comment"
+									{...register("comment")}
+								/>
+								<p className="text-danger">{errors.comment?.message}</p>
+							</div>
 						</div>
-					</div>
-					<div className="modal-footer">
-						<button
-							type="button"
-							className="btn btn-primary"
-							onClick={handleOnSave}
-						>
-							Save changes
-						</button>
-						<button
-							type="button"
-							className="btn btn-danger"
-							onClick={onModalClose}
-						>
-							Close
-						</button>
-					</div>
+						<div className="modal-footer">
+							<button type="submit" className="btn btn-primary">
+								Save changes
+							</button>
+							<button
+								type="button"
+								className="btn btn-danger"
+								onClick={onModalClose}
+							>
+								Close
+							</button>
+						</div>
+					</form>
 				</div>
 			</div>
 		</div>
