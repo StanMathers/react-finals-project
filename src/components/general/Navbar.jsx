@@ -27,9 +27,9 @@ const Navbar = ({ theme, onThemeChange }) => {
 	return (
 		<nav className="navbar navbar-expand-lg bg-body-tertiary">
 			<div className="container-fluid">
-				<a className="navbar-brand" href="#">
+				<Link className="navbar-brand" to="/">
 					Covid Stats
-				</a>
+				</Link>
 				<button
 					className="navbar-toggler"
 					type="button"
