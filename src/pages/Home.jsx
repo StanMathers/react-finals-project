@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 
-import Spinner from "../components/general/Spinner"
+import Spinner from "../components/general/Spinner";
 
 import covid from "../../services/covid-services";
 import dateServices from "../../services/date-services";
@@ -24,7 +24,7 @@ const Home = () => {
 		month: 4,
 		day: 2,
 	});
-    const [isLoading, setIsLoading] = useState(true);
+	const [isLoading, setIsLoading] = useState(true);
 
 	const [icon, setIcon] = useState("bi bi-heart h4");
 
@@ -50,7 +50,7 @@ const Home = () => {
 				recovered: data.data.recovered,
 				active: data.data.active,
 			});
-            setIsLoading(false);
+			setIsLoading(false);
 		});
 	}, [selectedDate]);
 
@@ -66,7 +66,10 @@ const Home = () => {
 
 	const handleOnFavouriteSelect = () => {
 		console.log("Clicked");
-		if (localStorage.getItem("favourites") === null || localStorage.getItem("favourites") === null) {
+		if (
+			localStorage.getItem("favourites") === null ||
+			localStorage.getItem("favourites") === null
+		) {
 			localStorage.setItem("favourites", JSON.stringify([totalReports]));
 			setIcon("bi bi-heart-fill h4");
 		} else {
@@ -92,7 +95,8 @@ const Home = () => {
 				<div className="col-10">
 					<input
 						onChange={(e) => {
-                            setIsLoading(true);
+							setIsLoading(true);
+							setIcon("bi bi-heart h4");
 							let date = e.target.value.split("-");
 							console.log(date);
 							setSelectedDate({
@@ -121,16 +125,24 @@ const Home = () => {
 
 			<div className="row align-items-center justify-content-center text-center">
 				<div className="col-12">
-					<div className="text-danger h2">Confirmed: { isLoading ? <Spinner />: totalReports.confirmed}</div>
+					<div className="text-danger h2">
+						Confirmed: {isLoading ? <Spinner /> : totalReports.confirmed}
+					</div>
 				</div>
 				<div className="col-12">
-					<div className="text-danger h2">Deaths: {isLoading ? <Spinner />: totalReports.deaths}</div>
+					<div className="text-danger h2">
+						Deaths: {isLoading ? <Spinner /> : totalReports.deaths}
+					</div>
 				</div>
 				<div className="col-12">
-					<div className="text-success h2">Recovered: {isLoading ? <Spinner />: totalReports.recovered}</div>
+					<div className="text-success h2">
+						Recovered: {isLoading ? <Spinner /> : totalReports.recovered}
+					</div>
 				</div>
 				<div className="col-12">
-					<div className="text-danger h2">Recovered: {isLoading ? <Spinner />: totalReports.active}</div>
+					<div className="text-danger h2">
+						Recovered: {isLoading ? <Spinner /> : totalReports.active}
+					</div>
 				</div>
 			</div>
 		</div>
