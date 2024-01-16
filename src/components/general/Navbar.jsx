@@ -63,7 +63,11 @@ const Navbar = ({ theme, onThemeChange }) => {
 						</li>
 					</ul>
 					<div className="d-flex align-items-center gap-2">
-						<div className="switch form-control" data-ison={theme==="dark"} onClick={onThemeChange}>
+						<div
+							className="switch form-control"
+							data-ison={theme === "dark"}
+							onClick={onThemeChange}
+						>
 							<motion.div className="handle" layout transition={spring} />
 						</div>
 						<a>

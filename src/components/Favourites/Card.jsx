@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Modal from "./Modal";
 import { motion } from "framer-motion";
+import "../../styles/Favourites/styles.css"
 
 const Card = ({ date, comment, lastUpdated, onClick, onCommentAdd }) => {
 	const [modalIsShown, setModalIsShown] = useState(false);
@@ -15,7 +16,7 @@ const Card = ({ date, comment, lastUpdated, onClick, onCommentAdd }) => {
 			>
 				<div className="card">
 					<div className="card-body">
-						<div className="d-flex align-items-center justify-content-between">
+						<div className="d-flex align-items-center justify-content-between col-item">
 							<div onClick={() => onClick(date)}>
 								<div className="card-title">{date}</div>
 								<p>Last updated at: {lastUpdated}</p>
