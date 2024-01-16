@@ -15,6 +15,8 @@ import Favourites from "./pages/Favourites";
 import Details from "./pages/Details";
 
 function App() {
+	// Set background to dark
+
 	return (
 		<BrowserRouter>
 			<Navbar />
