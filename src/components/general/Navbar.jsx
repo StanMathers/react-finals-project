@@ -53,26 +53,20 @@ const Navbar = ({ theme, onThemeChange }) => {
 								Saved
 							</Link>
 						</li>
-						<li className="nav-item">
-							<div className="form-check form-switch">
-								<input
-									className="form-check-input"
-									type="checkbox"
-									role="switch"
-									id="flexSwitchCheckDefault"
-									onChange={onThemeChange}
-									checked={theme === "dark"}
-								/>
-
-								<label
-									className="form-check-label"
-									htmlFor="flexSwitchCheckDefault"
-								>
-									<i className={themeIcon}></i>
-								</label>
-							</div>
-						</li>
 					</ul>
+					<div className="d-flex align-items-center">
+						<div className="form-check form-switch d-flex align-items-center">
+							<input
+								className="form-check-input"
+								type="checkbox"
+								role="switch"
+								id="flexSwitchCheckDefault"
+								onChange={onThemeChange}
+								checked={theme === "dark"}
+							/>
+						</div>
+						<i className={themeIcon + " h5"}></i>
+					</div>
 				</div>
 			</div>
 		</nav>
